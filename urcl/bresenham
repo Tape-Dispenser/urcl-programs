@@ -1,0 +1,128 @@
+OUT %BUFFER 0
+OUT %BUFFER 1
+JMP .code
+.x0
+DW 0
+.x1
+DW 0
+.y0
+DW 0
+.y1
+DW 0
+.c
+DW 0xFF
+.dx
+DW 0
+.dy
+DW 0
+.s1
+DW 0
+.s2
+DW 0
+.xchange
+DW 0
+.x
+DW 0
+.y
+DW 0
+.draw_line
+MOV R4 R0
+STR .dx 0
+STR .dy 0
+STR .s1 0
+STR .s2 0
+STR .xchange 0
+CPY .x .x0
+CPY .y .y0
+LOD R1 .x0
+LOD R2 .x1
+BGE .next R2 R1
+SUB R1 R1 R2
+STR .dx R1
+STR .s1 -1
+JMP .skip
+.next
+BNE .next1 R1 R2
+JMP .skip
+.next1
+SUB R1 R2 R1
+STR .dx R1
+STR .s1 1
+.skip
+LOD R1 .y0
+LOD R2 .y1
+BGE .next2 R2 R1
+SUB R1 R1 R2
+STR .dy R1
+STR .s2 -1
+JMP .skip1
+.next2
+BNE .next3 R1 R2
+JMP .skip1
+.next3
+SUB R1 R2 R1
+STR .dy R1
+STR .s2 1
+.skip1
+LOD R1 .dx
+LOD R2 .dy
+BLE .skip2 R2 R1
+CPY .dx .dy
+STR .dy R1
+STR .xchange 1
+.skip2  
+LOD R1 .dx
+LOD R2 .dy  
+LSH R2 R2
+SUB R4 R2 R1
+MOV R1 R0
+.loop
+PSH R1
+LOD R1 .x
+OUT %X R1
+LOD R1 .y
+OUT %Y R1
+LOD R1 .c
+OUT %COLOR R1
+OUT %BUFFER 2 // move this to right before the RET if you only want to update the screen once the whole line is drawn
+BRN .skip3 R4
+LOD R1 .xchange
+BRZ .next4 R1
+LOD R2 .x
+LOD R3 .s1
+ADD R2 R2 R3
+STR .x R2
+JMP .skip4
+.next4
+LOD R2 .y
+LOD R3 .s2
+ADD R2 R2 R3
+STR .y R2
+.skip4
+LOD R2 .dx
+LSH R2 R2
+SUB R4 R4 R2 
+.skip3
+LOD R1 .xchange
+BRZ .skip5 R1
+LOD R2 .y
+LOD R3 .s2
+ADD R2 R2 R3
+STR .y R2
+JMP .next5
+.skip5
+LOD R2 .x
+LOD R3 .s1
+ADD R2 R2 R3
+STR .x R2
+.next5
+LOD R1 .dy
+LSH R1 R1
+ADD R4 R4 R1
+POP R1
+INC R1 R1
+LOD R2 .dx
+BLE .loop R1 R2
+RET
+.code
+HLT
