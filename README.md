@@ -1,2 +1,2 @@
 # urcl-programs
-An archive of many of the useful and/or interesting URCL/URCL++ programs. To get your URCL/URCL++ program in here, either make an issue on this repository with your program, along with a short description, or message me on discord at Tape#8369
+An archive of many of the useful and/or interesting URCL/URCL++ programs. To get your URCL/URCL++ program in here, either make an issue on this repository with your program, along with a short description, or message me on discord at Tape#8369. Full credit for programs should be included in your submission, and will be added in comments at the top of all programs, along with how to use a program (if applicable). If you wish to submit a program made by someone else, make sure you have their permission to do so.
