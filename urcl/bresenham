@@ -1,5 +1,14 @@
-OUT %BUFFER 0
-OUT %BUFFER 1
+/*
+Bresenham's Line Algorithm by Tape
+Translated from C code by smaffer
+Original Code at https://github.com/smaffer/vgax/blob/master/VGAXUtils.h
+
+Usage: move starting coordinates as integers to .x0, .x1, .y0, and y1, put line colour in .c, then CAL .draw_line
+
+Notes: There is no code to check if you are attempting to draw outside the visible screen, so you will either need to modify the code or implement checks yourself.
+*/
+OUT %BUFFER 0 // clear screen
+OUT %BUFFER 1 // enable buffer
 JMP .code
 .x0
 DW 0
