@@ -1,7 +1,7 @@
 /*
 Bresenham's Line Algorithm by Tape
 Translated from C code by smaffer
-Original Code at https://github.com/smaffer/vgax/blob/master/VGAXUtils.h
+Original C code at https://github.com/smaffer/vgax/blob/master/VGAXUtils.h
 
 Usage: move starting coordinates as integers to .x0, .x1, .y0, and y1, put line colour in .c, then CAL .draw_line
 
